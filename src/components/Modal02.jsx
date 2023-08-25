@@ -1,10 +1,12 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './Themes'
+import Box from '@mui/material/Box';
+import { Divider, IconButton } from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear';
 
 
 const style = {
@@ -12,17 +14,16 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 380,
-  height: 340,
+  width: 640,
+  height: 589,
   bgcolor: 'background.paper',
-  borderRadius: 3,
-  p: 4,
+  borderRadius: 2,
 };
 
 const btn = {
   borderRadius: 50,
   fontFamily: 'Work Sans',
-  fontSize: 16,
+  fontSize: 14,
   fontWeight: 400,
 }
 
@@ -31,14 +32,20 @@ const btnStyle = {
   borderColor: '#666666',
 };
 
-const text = {
-  textAlign: 'center',
+const textTitle = {
   color: '#131313',
-  fontFamily: 'Work Sans'
+  fontFamily: 'Work Sans',
+  p: 2,
+  fontWeight: 500,
 }
 
+const text = {
+  color: '#131313',
+  fontFamily: 'Work Sans',
+  p: 2,
+}
 
-export default function BasicModal() {
+export default function Modal2() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -46,7 +53,7 @@ export default function BasicModal() {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <Button onClick={handleOpen} variant=''>Abrir</Button>
+        <Button onClick={handleOpen} variant='contained' color='error'>Abrir modal 2</Button>
         <Modal
           open={open}
           onClose={handleClose}
@@ -54,29 +61,29 @@ export default function BasicModal() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Box
-              display="flex"
-              justifyContent="center"
-              sx={{ mb: 2, mt: 1.5 }}
-            >
-              <img src="../media/ResultIcon.png" alt="warning" width='120' height='120' />
-            </Box>
-            <Typography id="modal-modal-title" variant="h6" component="h4" sx={text}>
-              Estás por modificar un atributo
+
+            <Typography id="modal-modal-title" component="h5" sx={textTitle}>
+              Configuración de atributos
+              <IconButton edge="end">
+                <ClearIcon />
+              </IconButton>
             </Typography>
+            <Divider/>
+
             <Typography id="modal-modal-description" sx={[text, { mt: 2 }]}>
               Al proceder se modificará en cada producto o servicios dónde se encuentre configurado.
             </Typography>
+            <Divider/>
             <Box
               display="flex"
-              justifyContent="center"
-              sx={{ mt: 8 }}
+              justifyContent="end"
+              sx={{ mt: 2 }}
             >
-              <Button variant='contained' disableElevation sx={[btn, btnStyle]} color='cancel'>
+              <Button variant='contained' disableElevation sx={[btn, btnStyle]} color='white'>
                 Cancelar
               </Button>
-              <Button variant='contained' disableElevation sx={[btn, { ml: 2 }]} color='normal'>
-                Modificar atributo
+              <Button variant='contained' disableElevation sx={[btn, { mr: 3, ml:1.5 }]} color='lblue'>
+                Guardar
               </Button>
             </Box>
           </Box>
