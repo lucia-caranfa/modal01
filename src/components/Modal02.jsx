@@ -4,9 +4,12 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './Themes'
+import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { Divider, IconButton } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
+import AddIcon from '@mui/icons-material/Add';
+import Switch from '@mui/material/Switch';
 
 
 const style = {
@@ -17,7 +20,7 @@ const style = {
   width: 640,
   height: 589,
   bgcolor: 'background.paper',
-  borderRadius: 2,
+  borderRadius: 1.3,
 };
 
 const btn = {
@@ -25,24 +28,65 @@ const btn = {
   fontFamily: 'Work Sans',
   fontSize: 14,
   fontWeight: 400,
-}
+};
 
 const btnStyle = {
   border: 1,
   borderColor: '#666666',
 };
 
+const addBtn = {
+  fontFamily: 'Work Sans',
+  fontSize: 14,
+  fontWeight: 400,
+  color: '#007868',
+};
+
 const textTitle = {
   color: '#131313',
   fontFamily: 'Work Sans',
-  p: 2,
+  pt: 2,
+  pl: 2,
+  pb: 1,
   fontWeight: 500,
-}
+};
 
 const text = {
   color: '#131313',
   fontFamily: 'Work Sans',
-  p: 2,
+  fontSize: 13,
+  mb: 0.4
+};
+
+const textBold = {
+  color: '#131313',
+  fontFamily: 'Work Sans',
+  fontSize: 14,
+  fontWeight: 500,
+};
+
+const pHolder = {
+  "label": { color: "blue" },
+  input: {
+    "&::placeholder": {
+      fontFamily: 'Work Sans',
+      color: "#666666",
+      fontSize: 14
+    },
+    fontFamily: 'Work Sans',
+  },
+};
+
+const swch = {
+  ml: 2.5,
+  color: "secondary"
+};
+
+const asterisco = {
+  color: '#F32465',
+  fontFamily: 'Work Sans',
+  fontSize: 14,
+  fontWeight: 400,
 }
 
 export default function Modal2() {
@@ -62,18 +106,73 @@ export default function Modal2() {
         >
           <Box sx={style}>
 
-            <Typography id="modal-modal-title" component="h5" sx={textTitle}>
-              Configuración de atributos
-              <IconButton edge="end">
-                <ClearIcon />
-              </IconButton>
-            </Typography>
-            <Divider/>
+            <Box display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              sx={{m:1}}>
+              <Box>
+                <Typography id="modal-modal-title" component="h5" sx={textTitle}>
+                  Configuración de atributos
+                </Typography>
+                </Box>
+              <Box>
+                <IconButton>
+                  <ClearIcon size='large' sx={{ stroke: "#ffffff", strokeWidth: 0.5, mr: 2 }}/>
+                </IconButton>
+              </Box>
+            </Box>
+            <Divider sx={{ mb: 4.5 }} />
 
-            <Typography id="modal-modal-description" sx={[text, { mt: 2 }]}>
-              Al proceder se modificará en cada producto o servicios dónde se encuentre configurado.
-            </Typography>
-            <Divider/>
+            <Box
+              sx={{
+                width: 560,
+                ml: 4,
+                mb: 2,
+              }}
+            >
+              <Box display="flex">
+              <Box sx={[asterisco,{ mr: 0.4}]}>*</Box><Typography id='atribute-name' sx={text}> Nombre del atributo</Typography>
+              </Box>
+              <TextField fullWidth placeholder='Escribe un nombre' id="fullWidth" size='small' sx={pHolder} />
+            </Box>
+
+            <Box
+              sx={{
+                width: 560,
+                ml: 4,
+                mb: 2.5,
+              }}
+            >
+              <Typography id='atribute-description' sx={text}>Descripción del atributo</Typography>
+              <TextField fullWidth placeholder='Escribe una descripción' id="fullWidth" size='small' sx={pHolder} />
+            </Box>
+
+            <Box display="flex">
+              <Box sx={[asterisco,{ ml: 4, mr: 0.4}]}>*</Box>
+            <Typography id='state' sx={[text, { mb: 0.3 }]}> Estado</Typography>
+            </Box>
+            <Box
+              display="flex"
+              alignItems="center"
+              sx={{ mb: 4 }}
+            >
+              <Switch sx={swch} color='lblue' />
+              <Typography sx={addBtn}>Activo</Typography>
+            </Box>
+            <Box
+              display='flex'
+            >
+              <Box sx={[asterisco,{ ml: 5, mr: 0.3}]}>*</Box><Typography id='variant' sx={[textBold, { mr: 12 }]}> Variante</Typography>
+              <Typography id='description' sx={textBold}>Descripción</Typography>
+            </Box>
+            <Divider sx={{ mx: 4, my: 1 }} />
+            <Box >
+              <TextField placeholder='Nombre' id="variant-name" size='small' sx={[pHolder, { width: 150, ml: 5 }]} />
+              <TextField id="variant-description" size='small' sx={[pHolder, { width: 350, ml: 2 }]} />
+            </Box>
+            <Divider sx={{ mx: 4, mt: 1, mb: 0.8 }} />
+            <Button startIcon={<AddIcon sx={{ stroke: "#ffffff", strokeWidth: 0.5 }} />} sx={[addBtn, { ml: 4, p: 0 }]}>Añadir nueva variante</Button>
+            <Divider sx={{ mt: 5.5 }} />
             <Box
               display="flex"
               justifyContent="end"
@@ -82,7 +181,7 @@ export default function Modal2() {
               <Button variant='contained' disableElevation sx={[btn, btnStyle]} color='white'>
                 Cancelar
               </Button>
-              <Button variant='contained' disableElevation sx={[btn, { mr: 3, ml:1.5 }]} color='lblue'>
+              <Button variant='contained' disableElevation sx={[btn, { mr: 3, ml: 1.5 }]} color='lblue'>
                 Guardar
               </Button>
             </Box>
