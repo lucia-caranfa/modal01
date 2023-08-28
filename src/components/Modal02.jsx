@@ -78,7 +78,7 @@ const pHolder = {
 };
 
 const swch = {
-  ml: 2.5,
+  ml: 3,
   color: "secondary"
 };
 
@@ -87,7 +87,27 @@ const asterisco = {
   fontFamily: 'Work Sans',
   fontSize: 14,
   fontWeight: 400,
-}
+};
+
+const sBar = {
+  overflowY: "scroll", 
+  mr: 1, 
+  scrollbarWidth: 'thin',
+  '&::-webkit-scrollbar': {
+    width: '0.4em',
+  },
+  '&::-webkit-scrollbar-track': {
+    background: "#D9D9D9",
+    borderRadius: '8px',
+    height: 10
+  },
+  '&::-webkit-scrollbar-thumb': {
+    backgroundColor: '#888',
+  },
+  '&::-webkit-scrollbar-thumb:hover': {
+    background: '#555'
+  },
+};
 
 export default function Modal2() {
   const [open, setOpen] = React.useState(false);
@@ -104,75 +124,82 @@ export default function Modal2() {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
+          <Box sx={style}
+          >
 
             <Box display="flex"
               justifyContent="space-between"
               alignItems="center"
-              sx={{m:1}}>
+              sx={{ m: 1 }}
+            >
               <Box>
                 <Typography id="modal-modal-title" component="h5" sx={textTitle}>
                   Configuración de atributos
                 </Typography>
-                </Box>
+              </Box>
               <Box>
                 <IconButton>
-                  <ClearIcon size='large' sx={{ stroke: "#ffffff", strokeWidth: 0.5, mr: 2 }}/>
+                  <ClearIcon size='large' sx={{ stroke: "#ffffff", strokeWidth: 0.5, mr: 2, fontSize: '29px' }} />
                 </IconButton>
               </Box>
             </Box>
-            <Divider sx={{ mb: 4.5 }} />
+            <Divider sx={{ mb: 2 }} />
 
-            <Box
-              sx={{
-                width: 560,
-                ml: 4,
-                mb: 2,
-              }}
-            >
-              <Box display="flex">
-              <Box sx={[asterisco,{ mr: 0.4}]}>*</Box><Typography id='atribute-name' sx={text}> Nombre del atributo</Typography>
+            <Box sx={sBar}>
+              <Box
+                sx={{
+                  width: 560,
+                  ml: 4.5,
+                  mb: 2,
+                  mt: 2.5,
+                }}
+              >
+                <Box display="flex">
+                  <Box sx={[asterisco, { mr: 0.4 }]}>*</Box><Typography id='atribute-name' sx={text}> Nombre del atributo</Typography>
+                </Box>
+                <TextField fullWidth placeholder='Escribe un nombre' id="fullWidth1" size='small' sx={pHolder} />
               </Box>
-              <TextField fullWidth placeholder='Escribe un nombre' id="fullWidth" size='small' sx={pHolder} />
-            </Box>
 
-            <Box
-              sx={{
-                width: 560,
-                ml: 4,
-                mb: 2.5,
-              }}
-            >
-              <Typography id='atribute-description' sx={text}>Descripción del atributo</Typography>
-              <TextField fullWidth placeholder='Escribe una descripción' id="fullWidth" size='small' sx={pHolder} />
-            </Box>
+              <Box
+                sx={{
+                  width: 560,
+                  ml: 4.5,
+                  mb: 2.5,
+                }}
+              >
+                <Typography id='atribute-description' sx={text}>Descripción del atributo</Typography>
+                <TextField fullWidth placeholder='Escribe una descripción' id="fullWidth2" size='small' sx={pHolder} />
+              </Box>
 
-            <Box display="flex">
-              <Box sx={[asterisco,{ ml: 4, mr: 0.4}]}>*</Box>
-            <Typography id='state' sx={[text, { mb: 0.3 }]}> Estado</Typography>
+              <Box display="flex">
+                <Box sx={[asterisco, { ml: 4.5, mr: 0.4 }]}>*</Box>
+                <Typography id='state' sx={[text, { mb: 0.3 }]}> Estado</Typography>
+              </Box>
+              <Box
+                display="flex"
+                alignItems="center"
+                sx={{ mb: 4 }}
+              >
+                <Switch id="switch" sx={swch} color='lblue' />
+                <Typography sx={addBtn}>Activo</Typography>
+              </Box>
+              <Box
+                display='flex'
+              >
+                <Box sx={[asterisco, { ml: 5, mr: 0.3 }]}>*</Box><Typography id='variant' sx={[textBold, { mr: 12 }]}> Variante</Typography>
+                <Typography id='description' sx={textBold}>Descripción</Typography>
+              </Box>
+
+              <Divider sx={{ mx: 4, my: 1 }} />
+              <Box >
+                <TextField placeholder='Nombre' id="variant-name" size='small' sx={[pHolder, { width: 150, ml: 5 }]} />
+                <TextField id="variant-description" size='small' sx={[pHolder, { width: 350, ml: 2 }]} />
+              </Box>
+              <Divider sx={{ mx: 4, mt: 1, mb: 0.8 }} />
+              <Button startIcon={<AddIcon sx={{ stroke: "#ffffff", strokeWidth: 0.5 }} />} sx={[addBtn, { ml: 4, p: 0, mb:2 }]}>Añadir nueva variante</Button>
+
             </Box>
-            <Box
-              display="flex"
-              alignItems="center"
-              sx={{ mb: 4 }}
-            >
-              <Switch sx={swch} color='lblue' />
-              <Typography sx={addBtn}>Activo</Typography>
-            </Box>
-            <Box
-              display='flex'
-            >
-              <Box sx={[asterisco,{ ml: 5, mr: 0.3}]}>*</Box><Typography id='variant' sx={[textBold, { mr: 12 }]}> Variante</Typography>
-              <Typography id='description' sx={textBold}>Descripción</Typography>
-            </Box>
-            <Divider sx={{ mx: 4, my: 1 }} />
-            <Box >
-              <TextField placeholder='Nombre' id="variant-name" size='small' sx={[pHolder, { width: 150, ml: 5 }]} />
-              <TextField id="variant-description" size='small' sx={[pHolder, { width: 350, ml: 2 }]} />
-            </Box>
-            <Divider sx={{ mx: 4, mt: 1, mb: 0.8 }} />
-            <Button startIcon={<AddIcon sx={{ stroke: "#ffffff", strokeWidth: 0.5 }} />} sx={[addBtn, { ml: 4, p: 0 }]}>Añadir nueva variante</Button>
-            <Divider sx={{ mt: 5.5 }} />
+            <Divider sx={{ mt: 3.5 }} />
             <Box
               display="flex"
               justifyContent="end"
